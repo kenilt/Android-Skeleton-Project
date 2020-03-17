@@ -1,3 +1,67 @@
 <resources>
-    <string name="app_name">Skeleton Application</string>
+    <string name="app_name">Skeleton</string>
+    <string name="facebook_provider_id">XXXXX</string>
+    <string name="facebook_app_id">XXXXX</string>
+
+    <string name="api_url">https://api.yourdomain.com/api/</string>
+    <string name="web_host">yourdomain.com</string>
+    <string name="app_link_host">www.yourdomain.com</string>
+
+    <string name="format_full_price_vnd">###,###,### đ</string>
+    <string name="normal_number_format">###,###,###,###</string>
+
+    <string name="empty_text">Không có dữ liệu nào</string>
+
+    <!-- Global-->
+    <string name="loading">Đang tải…</string>
+    <string name="loading_data">Đang tải dữ liệu…</string>
+
+    <string name="mgs_warning_no_interner">Không có kết nối mạng</string>
+    <string name="mgs_check_and_try_again">Vui lòng kiểm tra và thử lại</string>
+    <string name="mgs_unknown_error">Đã có lỗi xảy ra.</string>
+
+    <string name="cancel">Hủy</string>
+    <string name="ok">OK</string>
+    <string name="accept">Đồng ý</string>
+    <string name="skip">Bỏ qua</string>
+    <string name="try_again">Thử lại</string>
+    <string name="install">Cài đặt</string>
+
+    <string name="announcement">Thông báo</string>
+
+    <!--Date time-->
+    <string name="minute">phút</string>
+    <string name="hour">giờ</string>
+
+    <string name="ago">trước</string>
+    <string name="just_done">vừa xong</string>
+    <string name="yesterday_at">Hôm qua lúc</string>
+    <string name="at_time">lúc</string>
+    <string-array name="day_of_week">
+        <item>Chủ nhật</item>
+        <item>Thứ hai</item>
+        <item>Thứ ba</item>
+        <item>Thứ tư</item>
+        <item>Thứ năm</item>
+        <item>Thứ sáu</item>
+        <item>Thứ bảy</item>
+    </string-array>
+    <string name="default_date_format">dd/MM/yyyy \'lúc\' HH:mm</string>
+
+    <string name="just_add_to_cart_success">Bạn vừa thêm vào giỏ hàng</string>
+    <string name="just_add_box_to_cart_success">Bạn vừa thêm %s vào giỏ hàng</string>
+
+    <string name="copied_text">Đã copy %s</string>
+
+    <!--  Rating  -->
+    <string name="app_rating_title">Bạn có hài lòng với ứng dụng Skeleton?</string>
+    <string name="app_rating_description">Đánh giá ứng dụng 5 sao nếu bạn cảm thấy hài lòng.</string>
+    <string name="app_rating_agree">Đánh giá</string>
+    <string name="app_rating_disagree">Không</string>
+    <string name="app_rating_later">Để sau</string>
+
+    <!--Instant apps-->
+    <string name="dialog_install_recommend_message">Bạn có muốn cài đặt phiên bản đầy đủ của ứng dụng để được trải nghiệm đầy đủ các tính năng của Skeleton?</string>
+    <string name="dialog_install_for_function_message">Vui lòng cài đặt phiên bản đầy đủ để sử dụng tính năng này.</string>
+
 </resources>

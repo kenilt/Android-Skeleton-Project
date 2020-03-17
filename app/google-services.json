@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "XXXXX",
+    "project_id": "XXXXX"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "XXXXX",
+        "android_client_info": {
+          "package_name": "com.kenilt.skeleton"
+        }
+      },
+      "oauth_client": [
+      ],
+      "api_key": [
+        {
+          "current_key": "XXXXX"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "XXXXX"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

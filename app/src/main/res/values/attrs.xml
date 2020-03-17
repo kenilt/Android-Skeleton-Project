@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AppToolbar">
+        <attr name="title" format="string"/>
+        <attr name="showBack" format="boolean"/>
+        <attr name="showTitle" format="boolean"/>
+        <attr name="showCart" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="SpoilerTextView">
+        <attr name="trimLength" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="FeedMediaView">
+        <attr name="aspectRatio"/>
+    </declare-styleable>
+
+    <declare-styleable name="RatioRelativeLayout">
+        <attr name="aspectRatio"/>
+    </declare-styleable>
+
+    <declare-styleable name="RatioFrameLayout">
+        <attr name="aspectRatio"/>
+    </declare-styleable>
+
+    <declare-styleable name="RatioImageView">
+        <attr name="aspectRatio"/>
+    </declare-styleable>
+
+    <declare-styleable name="BadgeImageView">
+        <attr name="badgeImageUrl" format="string"/>
+        <attr name="badgeType" format="enum">
+            <enum name="topLeft" value="0" />
+            <enum name="topRight" value="1" />
+            <enum name="bottomLeft" value="2" />
+            <enum name="bottomRight" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="FeedStarsView">
+        <attr name="rating" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="CartButtonView">
+        <attr name="cartSize" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="GiftProgressView">
+        <attr name="percent"/>
+    </declare-styleable>
+
+    <declare-styleable name="LevelProgressView">
+        <attr name="startPoint" format="integer"/>
+        <attr name="endPoint" format="integer"/>
+        <attr name="currentPoint" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="LoginSuggestionView">
+        <attr name="description" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="CircleProgressBar">
+        <attr name="min" format="integer" />
+        <attr name="max" format="integer" />
+        <attr name="progress" format="integer" />
+        <attr name="progressbarColor" format="color" />
+        <attr name="progressBarThickness" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="DashView">
+        <attr name="color" format="color" />
+        <attr name="dashLength" format="dimension" />
+        <attr name="dashGap" format="dimension" />
+        <attr name="dashThickness" format="dimension" />
+        <attr name="orientation" format="enum">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+    </declare-styleable>
+</resources>

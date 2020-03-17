@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="message"
+            type="String" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/text_view_font_bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="@{title}"
+            android:textAllCaps="true"
+            android:textColor="@color/color_black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_message"
+            style="@style/text_view_font_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@{message}"
+            android:textColor="@color/color_dark_gray"
+            android:textSize="14sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/color_light_gray">
+
+            <LinearLayout
+                android:id="@+id/lixi_alert_view_ok"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="1dp"
+                >
+
+                <Button
+                    android:id="@+id/lixi_alert_btn_default_ok"
+                    style="@style/text_view_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/color_black"
+                    android:text="@string/ok"
+                    android:textAllCaps="true"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lixi_alert_view_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="1dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/lixi_alert_btn_cancel"
+                    style="@style/text_view_button"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="0.5dp"
+                    android:layout_weight="1"
+                    android:background="@color/color_concrete"
+                    android:text="@string/cancel"
+                    android:textAllCaps="true"
+                    android:textColor="@color/color_black" />
+
+                <Button
+                    android:id="@+id/lixi_alert_btn_confirm"
+                    style="@style/text_view_button"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="0.5dp"
+                    android:layout_weight="1"
+                    android:background="@color/color_black"
+                    android:text="@string/ok"
+                    android:textAllCaps="true" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</layout>

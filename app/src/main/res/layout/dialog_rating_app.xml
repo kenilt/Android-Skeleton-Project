@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/color_white">
+
+        <TextView
+            android:id="@+id/ratingApp_txtTitle"
+            style="@style/text_view_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:text="@string/app_rating_title"
+            android:textColor="@color/color_mine_shaft"/>
+
+        <ImageView
+            android:id="@+id/ratingApp_imgGiftPhone"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@null"
+            android:layout_gravity="center_horizontal"
+            android:tint="@color/color_denim"
+            app:srcCompat="@drawable/ic_app_review" />
+
+        <TextView
+            android:id="@+id/ratingApp_txtDescription"
+            style="@style/text_view_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:text="@string/app_rating_description"
+            android:textColor="@color/color_mine_shaft"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp">
+
+            <TextView
+                android:id="@+id/ratingApp_txtLater"
+                style="@style/text_view_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_rating_later"
+                android:textColor="@color/color_gray_davy"
+                android:textAllCaps="false"/>
+
+            <TextView
+                android:id="@+id/ratingApp_txtDisagree"
+                style="@style/text_view_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@+id/ratingApp_txtAgree"
+                android:text="@string/app_rating_disagree"
+                android:textColor="@color/color_gray_davy"
+                android:textAllCaps="false"
+                tools:ignore="RelativeOverlap" />
+
+            <TextView
+                android:id="@+id/ratingApp_txtAgree"
+                style="@style/text_view_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="@string/app_rating_agree"
+                android:textColor="@color/color_denim"
+                android:textAllCaps="false"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</layout>

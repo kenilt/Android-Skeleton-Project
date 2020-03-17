@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Skeleton Staging</string>
+    <string name="facebook_provider_id">XXXXX</string>
+    <string name="facebook_app_id">XXXXX</string>
+
+    <string name="api_url">https://api.yourstaging.com/api/</string>
+    <string name="web_host">yourstaging.com</string>
+    <string name="app_link_host">yourstaging.com</string>
+    <string name="shop_url">https://yourstaging.com/shop/</string>
+    <string name="magazine_url">https://www.yourstaging.com/magazine/</string>
+</resources>

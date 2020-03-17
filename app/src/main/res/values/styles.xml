@@ -1,11 +1,39 @@
 <resources>
 
+    <style name="CustomCirclePageIndicator">
+        <item name="fillColor">@color/colorAccent</item>
+        <item name="pageColor">#aaaaaa</item>
+        <item name="radius">4dp</item>
+        <item name="centered">true</item>
+    </style>
+
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/color_dark_gray</item>
+        <item name="colorControlActivated">@color/color_dark_gray</item>
+        <item name="colorControlHighlight">@color/color_dark_gray</item>
+        <item name="multiSliderStyle">@style/sliderHoloStyle</item>
+        <item name="android:fontFamily">@font/nunito_sans</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="vpiCirclePageIndicatorStyle">@style/CustomCirclePageIndicator</item>
+        <item name="android:fontFamily">@font/nunito_sans</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.Fullscreen" parent="AppTheme.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="SplashTheme" parent="AppTheme.NoActionBar.Fullscreen">
+        <item name="android:windowBackground">@color/color_black</item>
     </style>
 
 </resources>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="emptyText"
+            type="String" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/item_txtNoItem"
+            android:layout_marginBottom="6dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_empty"
+            android:tint="@color/color_dark_gray"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:id="@+id/item_txtNoItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:paddingBottom="20dp"
+            android:text="@{emptyText ?? @string/empty_text}"
+            tools:text="Sorry, no items found"
+            android:gravity="center"
+            style="@style/text_view_caption"/>
+
+    </RelativeLayout>
+
+</layout>

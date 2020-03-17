@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="onRetryListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_no_wifi"
+            android:tint="@color/color_dark_gray"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="4dp"
+            android:text="@string/mgs_warning_no_interner"
+            tools:text="Sorry, no networks"
+            android:gravity="center"
+            style="@style/text_view_caption"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/mgs_check_and_try_again"
+            tools:text="Please check and try again"
+            android:gravity="center"
+            style="@style/text_view_caption"/>
+
+        <Button
+            android:id="@+id/item_button_retry"
+            style="@style/text_view_button"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:text="@string/try_again"
+            android:background="@drawable/background_blue_with_border_raidus"
+            android:onClick="@{onRetryListener}"/>
+
+    </LinearLayout>
+
+</layout>

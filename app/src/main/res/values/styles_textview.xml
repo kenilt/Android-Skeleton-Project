@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="text_view_font_medium">
+        <item name="android:fontFamily">@font/nunito_sans_medium</item>
+    </style>
+
+    <style name="text_view_font_demibold">
+        <item name="android:fontFamily">@font/nunito_sans_semibold</item>
+    </style>
+
+    <style name="text_view_font_bold">
+        <item name="android:fontFamily">@font/nunito_sans_bold</item>
+    </style>
+
+    <!--TextView styles-->
+
+    <style name="text_view_content" parent="text_view_font_medium">
+        <item name="android:textColor">@color/color_black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="text_view_title" parent="text_view_font_demibold">
+        <item name="android:textColor">@color/color_black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="text_view_caption" parent="text_view_font_medium">
+        <item name="android:textColor">@color/color_mine_shaft</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="text_view_button" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:fontFamily">@font/nunito_sans_semibold</item>
+        <item name="android:textColor">@color/color_white</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+</resources>

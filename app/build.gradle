@@ -1,37 +1,309 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'io.fabric'
+    id 'com.github.triplet.play' version '2.7.2'
+    id 'jacoco'
+}
+
+apply from: "$project.rootDir/tools/script-git-version.gradle"
+apply from: "$project.rootDir/tools/jacoco.gradle"
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+    mavenCentral()
+    maven { url 'https://github.com/leonardocardoso/mvn-repo/raw/master/maven-deploy' }
+}
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
-
+    compileSdkVersion setup.compileSdk
     defaultConfig {
         applicationId "com.kenilt.skeleton"
-        minSdkVersion 16
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion setup.minSdk
+        targetSdkVersion setup.targetSdk
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        versionCode appVersionCode
+        versionName appVersionName
+
+        testInstrumentationRunner "com.kenilt.skeleton.mock.MockRunner"
+
+        resConfigs "en"
+
+        manifestPlaceholders = [onesignal_google_project_number: "XXXXX"]
     }
-
-    buildTypes {
+    sourceSets {
+        String sharedTestDir = 'src/sharedTest/java'
+        test {
+            java.srcDir sharedTestDir
+        }
+        androidTest {
+            java.srcDir sharedTestDir
+            resources.srcDirs += ['src/sharedTest/resources']
+        }
+    }
+    signingConfigs {
         release {
+            storeFile file(System.getenv("KEYSTORE") ?: "XXXXX-key-path")
+            storePassword System.getenv("KEYSTORE_PASSWORD") ?: "XXXXX"
+            keyAlias System.getenv("KEYSTORE_ALIAS") ?: "XXXXX"
+            keyPassword System.getenv("KEYSTORE_PASSWORD") ?: "XXXXX"
+        }
+    }
+    buildTypes {
+        debug {
+            testCoverageEnabled = true
+            multiDexEnabled true
             minifyEnabled false
+            ext.enableCrashlytics = false
+        }
+        release {
+            multiDexEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
+    flavorDimensions "default"
+    productFlavors {
+        staging {
+            dimension "default"
+            applicationIdSuffix ".staging"
+            versionNameSuffix "-staging"
+            manifestPlaceholders = [onesignal_app_id: "XXXXX"]
+        }
+        production {
+            dimension "default"
+            manifestPlaceholders = [onesignal_app_id: "XXXXX"]
+        }
+    }
+
+    testOptions {
+        animationsDisabled true
+
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
+    dataBinding {
+        enabled true
+    }
+
+    dexOptions {
+        preDexLibraries false
+        javaMaxHeapSize "true" == System.getenv("CIRCLECI") ? "2048M" : "12g"
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+// Configuration for com.github.triplet.play deployment
+play {
+    track = appDeploymentTrack
+    serviceAccountCredentials = file(System.getenv("PRIVATE_KEY") ?: "XXXXX-play_api_key.json")
+    defaultToAppBundles = true // Use App Bundle instead of APK
+    resolutionStrategy = "ignore"
+    //If the deployment fails due to an API error, don't fail the CI Build
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    def lifecycle_version = "2.2.0"
+    def paging_version = "2.1.1"
+    def dagger_version = "2.16"
+
+    // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.2.0'
+
+    // Local project
+    implementation project(':pullrefresh')
+
+    // Constraint layout
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+
+    // Youtube player
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
+
+    // Android X
+    implementation "androidx.appcompat:appcompat:1.1.0"
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
+
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+
+    // Paging
+    implementation "androidx.paging:paging-runtime:$paging_version"
+
+    // Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    // Facebook components
+    implementation 'com.facebook.android:facebook-login:5.8.0'
+
+    // Firebase
+    implementation 'com.google.firebase:firebase-core:17.2.3'
+    implementation 'com.google.firebase:firebase-messaging:20.1.2'
+
+    // Google services
+    implementation 'com.google.android.play:core:1.6.5'
+    implementation "com.google.android.gms:play-services-location:17.0.0"
+    implementation 'com.google.android.gms:play-services-auth:17.0.0'
+
+    // OneSignal
+    implementation ('com.onesignal:OneSignal:3.10.8') {
+        exclude group: 'com.google.android.gms'
+        exclude group: 'com.google.firebase', module: 'firebase-messaging'
+    }
+
+    // Instant apps
+    implementation 'com.google.android.gms:play-services-instantapps:17.0.0'
+
+    // Dagger2
+    implementation "com.google.dagger:dagger:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:${versions.retrofitLib}"
+    implementation "com.squareup.retrofit2:converter-gson:${versions.retrofitLib}"
+    implementation "com.squareup.retrofit2:adapter-rxjava:${versions.retrofitLib}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${versions.okhttpLib}"
+
+    // Crashlytics
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+
+    // permission request
+    implementation 'pub.devrel:easypermissions:1.2.0'
+
+    // Circle image
+    implementation 'de.hdodenhof:circleimageview:2.1.0'
+
+    // Flex box
+    implementation 'com.google.android:flexbox:1.1.0'
+
+    // Pick image
+    implementation('com.github.esafirm.android-image-picker:imagepicker:2.2.0') {
+        exclude group: 'com.github.bumptech.glide', module: 'glide'
+    }
+
+    // Slider
+    implementation 'io.apptik.widget:multislider:1.3'
+    implementation 'io.apptik.widget:multislider-holo:1.3'
+
+    // Branch.io
+    implementation('io.branch.sdk.android:library:4.+') {
+        exclude module: 'answers-shim'
+    }
+    // required if your app is in the Google Play Store (tip: avoid using bundled play services libs)
+    implementation 'com.google.firebase:firebase-appindexing:19.1.0' // App indexing
+
+    // Event Bus
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
+    // ZXing
+    implementation 'com.google.zxing:core:3.3.3'
+
+    // Link preview
+    implementation 'org.jsoup:jsoup:1.11.3'
+    implementation 'com.github.kenilt:Android-Link-Preview:2.0.0'
+
+    // Transition Anywhere
+    implementation "com.andkulikov:transitionseverywhere:2.0.0"
+
+    // sticky headers
+    implementation 'com.brandongogetap:stickyheaders:0.5.1'
+
+    // Smart location
+    implementation 'io.nlopez.smartlocation:library:3.3.3'
+
+    // Tag view
+    implementation 'co.lujun:androidtagview:1.1.7'
+
+    // Shimmer
+    implementation 'com.facebook.shimmer:shimmer:0.4.0'
+
+    // Text util
+    implementation 'org.apache.commons:commons-lang3:3.5'
+
+    // MoMo payment
+    implementation 'com.github.momodevelopment:androidsdkV2.2:2.3'
+
+    // Circle indicator
+    implementation 'com.kenilt.circleindicator:circleindicator:1.0.1'
+
+    // Looping ViewPager
+    implementation 'com.kenilt.loopingviewpager:loopingviewpager:0.1.0'
+
+    //---- Test ----
+    // JUnit
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // Test live data
+    testImplementation 'androidx.arch.core:core-testing:2.1.0'
+    testImplementation 'com.jraska.livedata:testing-ktx:1.1.0'
+
+    // Mockito
+    testImplementation "org.mockito:mockito-core:${versions.mockitoLib}"
+
+    // MockK
+    testImplementation "io.mockk:mockk:1.9.3.kotlin12"
+
+    // MockWebServer
+    testImplementation "com.squareup.okhttp3:mockwebserver:${versions.okhttpLib}"
+    testImplementation "com.squareup.retrofit2:retrofit-mock:${versions.retrofitLib}"
+
+    //---- Android Test ----
+    // Mockito
+    androidTestImplementation "org.mockito:mockito-core:${versions.mockitoLib}"
+
+    // Dagger 2
+    kaptAndroidTest "com.google.dagger:dagger-compiler:$dagger_version"
+    kaptAndroidTest "com.google.dagger:dagger-android-processor:$dagger_version"
+
+    // MockWebServer
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:${versions.okhttpLib}"
+
+    // Espresso
+    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espressoLib}", {
+        exclude group: 'com.google.code.findbugs'
+    }
+
+    // Espresso intent mocking support
+    androidTestImplementation "androidx.test.espresso:espresso-intents:${versions.espressoLib}", {
+        exclude group: 'com.google.code.findbugs'
+    }
+
+    // Espresso for web view testing support
+    androidTestImplementation "androidx.test.espresso:espresso-web:${versions.espressoLib}", {
+        exclude group: 'com.google.code.findbugs'
+    }
+
+    // Espresso contrib
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:${versions.espressoLib}", {
+        exclude group: 'com.google.code.findbugs'
+    }
+
+    // UiAnimator
+    androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.3'
 }
+
+apply plugin: 'com.google.gms.google-services'
+
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
